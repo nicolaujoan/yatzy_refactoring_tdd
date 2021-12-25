@@ -111,8 +111,8 @@ class Yatzy:
     def largeStraight(*dice):
         max = 6 
         min = 2
-        small_straight = list(range(min, max + 1))
-        if list(dice) == small_straight: return sum(small_straight)
+        large_straight = list(range(min, max + 1))
+        if list(dice) == large_straight: return sum(large_straight)
         else: return 0
     
     @staticmethod
