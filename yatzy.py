@@ -62,6 +62,7 @@ class Yatzy:
                 mydice = list(filter((biggest).__ne__, mydice))
         return 0
 
+    
     @staticmethod
     def two_pair(*dice):
         mydice = list(dice)
@@ -80,6 +81,7 @@ class Yatzy:
             mydice = list(filter((biggest).__ne__, mydice))
         return 0
             
+        
     @staticmethod
     def four_of_a_kind(*dice):
         FOUR = 4
@@ -115,6 +117,7 @@ class Yatzy:
         if list(dice) == large_straight: return sum(large_straight)
         else: return 0
     
+    
     @staticmethod
     def __two_of_a_kind(*dice):
         TWO = 2
@@ -123,6 +126,7 @@ class Yatzy:
                 return die * TWO
         return 0
 
+    
     @staticmethod
     def fullHouse(*dice):
         if Yatzy.__two_of_a_kind(*dice) and Yatzy.three_of_a_kind(*dice):
