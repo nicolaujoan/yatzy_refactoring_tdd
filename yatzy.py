@@ -118,7 +118,6 @@ class Yatzy:
         else: return 0
     
     
-    @staticmethod
     def __two_of_a_kind(*dice):
         TWO = 2
         for die in range(max(dice), 0, -1):
@@ -126,6 +125,7 @@ class Yatzy:
                 return die * TWO
         return 0
 
+    # this has to be a class method because knows about class behaviour (uses methods inside the class)
     @classmethod
     def fullHouse(cls, *dice):
         if cls.__two_of_a_kind(*dice) and cls.three_of_a_kind(*dice):
