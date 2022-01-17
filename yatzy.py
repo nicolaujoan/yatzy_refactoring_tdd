@@ -126,16 +126,8 @@ class Yatzy:
                 return die * TWO
         return 0
 
-<<<<<<< HEAD
-    @staticmethod
-        if Yatzy.__two_of_a_kind(*dice) and Yatzy.three_of_a_kind(*dice):
-            return Yatzy.__two_of_a_kind(*dice) + Yatzy.three_of_a_kind(*dice)  
+    @classmethod
+    def fullHouse(cls, *dice):
+        if cls.__two_of_a_kind(*dice) and cls.three_of_a_kind(*dice):
+            return cls.__two_of_a_kind(*dice) + cls.three_of_a_kind(*dice)  
         return 0
-=======
-    
-    @staticmethod
-    def fullHouse(*dice):
-        if Yatzy.__two_of_a_kind(*dice) and Yatzy.three_of_a_kind(*dice):
-            return Yatzy.__two_of_a_kind(*dice) + Yatzy.three_of_a_kind(*dice)  
-        return 0
->>>>>>> 32ff638d555b0cfc5c1cfa08a0422e62a8052ee9
