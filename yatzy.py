@@ -47,39 +47,37 @@ class Yatzy:
     def sixes(self):
         SIX = 6
         return self.dice.count(SIX) * SIX
-    
-    @staticmethod
-    def score_pair(*dice):
-        mydice = list(dice)
-        matching_dice_found = False
-        PAIR = 2
-        while not matching_dice_found and len(mydice) >= PAIR:
-            biggest = max(mydice)
-            if mydice.count(biggest) >= PAIR:
-                matching_dice_found = True
-                return biggest * PAIR
-            else:
-                mydice = list(filter((biggest).__ne__, mydice))
-        return 0
 
-    
-    @staticmethod
-    def two_pair(*dice):
-        mydice = list(dice)
-        double_matching_dice_found = False
+    @classmethod
+    def __find_matching_dice(cls, dice, desired_matchings):
+        matchings_found = False
         PAIR = 2
         matchings = 0
         score = 0
-        while not double_matching_dice_found and len(mydice) >= PAIR:
-            biggest = max(mydice)
-            if mydice.count(biggest) >= PAIR:
+        
+        while not matchings_found and len(dice) >= PAIR:
+            biggest_die = max(dice)
+            if dice.count(biggest_die) >= PAIR:
                 matchings += 1
-                score += biggest * PAIR
-                if matchings == PAIR:
-                    double_matching_dice_found = True
+                score += biggest_die * PAIR
+                if matchings == desired_matchings:
+                    matchings_found = True
                     return score
-            mydice = list(filter((biggest).__ne__, mydice))
+            dice = list(filter(biggest_die.__ne__, dice))   # eliminate dice that cannot match
         return 0
+    
+    @classmethod
+    def score_pair(cls, *dice):
+        desired_matchings = 1
+        score = cls.__find_matching_dice(list(dice), desired_matchings)
+        return score
+
+    
+    @classmethod
+    def two_pair(cls, *dice):
+        desired_matchings = 2
+        score = cls.__find_matching_dice(list(dice), desired_matchings)
+        return score
             
         
     @staticmethod
@@ -117,7 +115,7 @@ class Yatzy:
         if list(dice) == large_straight: return sum(large_straight)
         else: return 0
     
-    
+
     def __two_of_a_kind(*dice):
         TWO = 2
         for die in range(max(dice), 0, -1):
