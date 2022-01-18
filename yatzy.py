@@ -11,8 +11,9 @@ class Yatzy:
 
     @staticmethod
     def yatzy(*dice):
+        YATZY_SCORE = 50
         equal_dice = dice[:-1] == dice[1:]
-        return 50 if equal_dice else 0
+        return YATZY_SCORE if equal_dice else 0
     
 
     @staticmethod
