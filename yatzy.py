@@ -11,9 +11,7 @@ class Yatzy:
 
     @staticmethod
     def yatzy(*dice):
-        if dice[:-1] == dice[1:]:
-            return 50
-        return 0
+        return 50 if dice[:-1] == dice[1:] else 0
     
 
     @staticmethod
@@ -48,6 +46,7 @@ class Yatzy:
         SIX = 6
         return self.dice.count(SIX) * SIX
 
+
     @classmethod
     def __find_matching_dice(cls, dice, desired_matchings):
         matchings_found = False
@@ -66,20 +65,21 @@ class Yatzy:
             dice = list(filter(biggest_die.__ne__, dice))   # eliminate dice that cannot match
         return 0
     
+
     @classmethod
     def score_pair(cls, *dice):
         desired_matchings = 1
         score = cls.__find_matching_dice(list(dice), desired_matchings)
         return score
-
     
+
     @classmethod
     def two_pair(cls, *dice):
         desired_matchings = 2
         score = cls.__find_matching_dice(list(dice), desired_matchings)
         return score
-            
         
+
     @staticmethod
     def four_of_a_kind(*dice):
         FOUR = 4
@@ -87,7 +87,7 @@ class Yatzy:
             if dice.count(die) >= FOUR:
                 return die * FOUR
         return 0
-    
+
 
     @staticmethod
     def three_of_a_kind(*dice):
@@ -96,24 +96,21 @@ class Yatzy:
             if dice.count(die) >= THREE:
                 return die * THREE
         return 0
-    
 
     @staticmethod
     def smallStraight(*dice):
         max = 5
         min = 1
         small_straight = list(range(min, max + 1))
-        if list(dice) == small_straight: return sum(small_straight)
-        else: return 0
-    
+        return sum(small_straight) if list(dice) == small_straight else 0
+
 
     @staticmethod
     def largeStraight(*dice):
         max = 6 
         min = 2
         large_straight = list(range(min, max + 1))
-        if list(dice) == large_straight: return sum(large_straight)
-        else: return 0
+        return sum(large_straight) if list(dice) == large_straight else 0
     
 
     def __two_of_a_kind(*dice):
@@ -123,7 +120,7 @@ class Yatzy:
                 return die * TWO
         return 0
 
-    # this has to be a class method because knows about class behaviour (uses methods inside the class)
+
     @classmethod
     def fullHouse(cls, *dice):
         if cls.__two_of_a_kind(*dice) and cls.three_of_a_kind(*dice):
