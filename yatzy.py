@@ -49,19 +49,16 @@ class Yatzy:
 
     @classmethod
     def __find_matching_dice(cls, dice, desired_matchings):
-        matchings_found = False
         matchings = 0
         score = 0
         
-        while not matchings_found and len(dice) >= cls.PAIR:
+        while len(dice) >= cls.PAIR:
             biggest_die = max(dice)
             if dice.count(biggest_die) >= cls.PAIR:
                 matchings += 1
                 score += biggest_die * cls.PAIR
-                if matchings == desired_matchings:
-                    matchings_found = True
-                    return score
-            dice = list(filter(biggest_die.__ne__, dice))   # eliminate dice that cannot match
+                if matchings == desired_matchings: return score
+            dice = list(filter(biggest_die.__ne__, dice))
         return 0
     
 
