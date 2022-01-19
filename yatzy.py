@@ -1,4 +1,8 @@
+from pips import Pips
+
 class Yatzy:
+
+    PAIR = 2
 
     def __init__(self, *dice):
         self.dice = list(dice)
@@ -18,49 +22,42 @@ class Yatzy:
 
     @staticmethod
     def ones(*dice):
-        ONE = 1
-        return dice.count(ONE) * ONE
+        return dice.count(Pips.ONE.value) * Pips.ONE.value
 
     
     @staticmethod
     def twos(*dice):
-        TWO = 2
-        return dice.count(TWO) * TWO
+        return dice.count(Pips.TWO.value) * Pips.TWO.value
 
     
     @staticmethod
     def threes(*dice):
-            THREE = 3
-            return dice.count(THREE) * THREE
+            return dice.count(Pips.TWO.value) * Pips.TWO.value
         
     
     def fours(self):
-        FOUR = 4
-        return self.dice.count(FOUR) * FOUR
+        return self.dice.count(Pips.FOUR.value) * Pips.FOUR.value
     
 
     def fives(self):
-      FIVE = 5
-      return self.dice.count(FIVE) * FIVE
-    
+      return self.dice.count(Pips.FIVE.value) * Pips.FIVE.value
+
 
     def sixes(self):
-        SIX = 6
-        return self.dice.count(SIX) * SIX
+        return self.dice.count(Pips.SIX.value) * Pips.SIX.value
 
 
     @classmethod
     def __find_matching_dice(cls, dice, desired_matchings):
         matchings_found = False
-        PAIR = 2
         matchings = 0
         score = 0
         
-        while not matchings_found and len(dice) >= PAIR:
+        while not matchings_found and len(dice) >= cls.PAIR:
             biggest_die = max(dice)
-            if dice.count(biggest_die) >= PAIR:
+            if dice.count(biggest_die) >= cls.PAIR:
                 matchings += 1
-                score += biggest_die * PAIR
+                score += biggest_die * cls.PAIR
                 if matchings == desired_matchings:
                     matchings_found = True
                     return score
@@ -84,42 +81,35 @@ class Yatzy:
 
     @staticmethod
     def four_of_a_kind(*dice):
-        FOUR = 4
         for die in range(max(dice), 1, -1):
-            if dice.count(die) >= FOUR:
-                return die * FOUR
+            if dice.count(die) >= Pips.FOUR.value:
+                return die * Pips.FOUR.value
         return 0
 
 
     @staticmethod
     def three_of_a_kind(*dice):
-        THREE = 3
         for die in range(max(dice), 1, -1):
-            if dice.count(die) >= THREE:
-                return die * THREE
+            if dice.count(die) >= Pips.THREE.value:
+                return die * Pips.THREE.value
         return 0
 
     @staticmethod
     def smallStraight(*dice):
-        max = 5
-        min = 1
-        small_straight = list(range(min, max + 1))
+        small_straight = list(range(Pips.ONE.value, Pips.FIVE.value + 1))
         return sum(small_straight) if list(dice) == small_straight else 0
 
 
     @staticmethod
     def largeStraight(*dice):
-        max = 6 
-        min = 2
-        large_straight = list(range(min, max + 1))
+        large_straight = list(range(Pips.TWO.value, Pips.SIX.value + 1))
         return sum(large_straight) if list(dice) == large_straight else 0
     
 
     def __two_of_a_kind(*dice):
-        TWO = 2
         for die in range(max(dice), 0, -1):
-            if dice.count(die) == TWO:
-                return die * TWO
+            if dice.count(die) == Pips.TWO.value:
+                return die * Pips.TWO.value
         return 0
 
 
